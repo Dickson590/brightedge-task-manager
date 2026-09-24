@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BrightEdge Task Manager</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>BrightEdge</h1>
+            <p>Task Manager</p>
+        </div>
+    </header>
+
+
+    <main class="container">
+
+        <!-- Add Task -->
+        <section class="add-task-section">
+
+            <div class="section-header">
+                <h2>Add New Task</h2>
+                <p>Create a task and keep track of your work.</p>
+            </div>
+
+            <form id="taskForm">
+
+                <div class="form-group">
+                    <label for="taskTitle">Task Title</label>
+
+                    <input
+                        type="text"
+                        id="taskTitle"
+                        name="taskTitle"
+                        placeholder="Enter task title"
+                        required
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="taskDescription">
+                        Description
+                        <span>(Optional)</span>
+                    </label>
+
+                    <textarea
+                        id="taskDescription"
+                        name="taskDescription"
+                        placeholder="Enter a description for your task..."
+                        rows="4"
+                    ></textarea>
+                </div>
+
+
+                <button type="submit" class="add-task-btn">
+                    Add Task
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- Task List -->
+        <section class="tasks-section">
+
+            <div class="tasks-header">
+
+                <div>
+                    <h2>My Tasks</h2>
+                    <p>Manage your current tasks</p>
+                </div>
+
+                <span id="taskCount">0 Tasks</span>
+
+            </div>
+
+
+            <!-- JavaScript will place tasks here -->
+            <div id="taskList" class="task-list">
+
+                <!-- Empty state -->
+                <div id="emptyMessage" class="empty-message">
+
+                    <h3>No tasks yet</h3>
+
+                    <p>
+                        Add a task above to get started.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="container">
+
+            <p>
+                &copy; 2026 BrightEdge Technologies
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
