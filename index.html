@@ -4,121 +4,562 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>BrightEdge Task Manager</title>
+    <title>TaskFlow — Task Manager</title>
 
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <h1>BrightEdge</h1>
-            <p>Task Manager</p>
+    <!-- ================================
+         SIDEBAR
+    ================================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>TaskFlow</span>
         </div>
-    </header>
 
+        <nav class="sidebar-nav">
 
-    <main class="container">
+            <p class="nav-title">MAIN</p>
 
-        <!-- Add Task -->
-        <section class="add-task-section">
+            <a href="#" class="nav-link active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
 
-            <div class="section-header">
-                <h2>Add New Task</h2>
-                <p>Create a task and keep track of your work.</p>
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-list-check"></i>
+                <span>My Tasks</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-folder"></i>
+                <span>Projects</span>
+            </a>
+
+            <p class="nav-title">WORKSPACE</p>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-calendar"></i>
+                <span>Calendar</span>
+            </a>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+
+            <p class="nav-title">OTHER</p>
+
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="upgrade-card">
+                <i class="fa-solid fa-rocket"></i>
+
+                <h3>Upgrade to Pro</h3>
+
+                <p>
+                    Unlock more features and manage your work better.
+                </p>
+
+                <button>Upgrade</button>
             </div>
 
-            <form id="taskForm">
+            <button class="logout-btn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Log Out</span>
+            </button>
 
-                <div class="form-group">
-                    <label for="taskTitle">Task Title</label>
+        </div>
 
-                    <input
-                        type="text"
-                        id="taskTitle"
-                        name="taskTitle"
-                        placeholder="Enter task title"
-                        required
-                    >
+    </aside>
+
+
+    <!-- ================================
+         MAIN CONTENT
+    ================================= -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <button class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search tasks..."
+                >
+
+                <span class="search-shortcut">⌘ K</span>
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <button class="icon-btn" id="themeToggle">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <button class="icon-btn notification-btn">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="profile">
+
+                    <div class="profile-avatar">
+                        M
+                    </div>
+
+                    <div class="profile-info">
+                        <strong>Michael</strong>
+                        <span>Free Plan</span>
+                    </div>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
                 </div>
 
+            </div>
 
-                <div class="form-group">
-                    <label for="taskDescription">
-                        Description
-                        <span>(Optional)</span>
-                    </label>
+        </header>
 
-                    <textarea
-                        id="taskDescription"
-                        name="taskDescription"
-                        placeholder="Enter a description for your task..."
-                        rows="4"
-                    ></textarea>
+
+        <!-- DASHBOARD -->
+
+        <section class="dashboard">
+
+            <div class="welcome-section">
+
+                <div>
+                    <p class="greeting">Good morning 👋</p>
+
+                    <h1>Welcome back, Michael</h1>
+
+                    <p class="welcome-text">
+                        Here's what's happening with your tasks today.
+                    </p>
                 </div>
 
-
-                <button type="submit" class="add-task-btn">
+                <button class="add-task-btn" id="openTaskModal">
+                    <i class="fa-solid fa-plus"></i>
                     Add Task
                 </button>
 
-            </form>
-
-        </section>
+            </div>
 
 
-        <!-- Task List -->
-        <section class="tasks-section">
+            <!-- ================================
+                 STATISTICS
+            ================================= -->
 
-            <div class="tasks-header">
+            <div class="stats-grid">
 
-                <div>
-                    <h2>My Tasks</h2>
-                    <p>Manage your current tasks</p>
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+
+                    <div class="stat-content">
+                        <span>Total Tasks</span>
+                        <h2 id="totalTasks">0</h2>
+                    </div>
+
                 </div>
 
-                <span id="taskCount">0 Tasks</span>
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+
+                    <div class="stat-content">
+                        <span>In Progress</span>
+                        <h2 id="progressTasks">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div class="stat-content">
+                        <span>Completed</span>
+                        <h2 id="completedTasks">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon red">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <div class="stat-content">
+                        <span>Overdue</span>
+                        <h2 id="overdueTasks">0</h2>
+                    </div>
+
+                </div>
 
             </div>
 
 
-            <!-- JavaScript will place tasks here -->
-            <div id="taskList" class="task-list">
+            <!-- ================================
+                 TASK SECTION
+            ================================= -->
 
-                <!-- Empty state -->
-                <div id="emptyMessage" class="empty-message">
+            <section class="tasks-section">
 
-                    <h3>No tasks yet</h3>
+                <div class="section-header">
+
+                    <div>
+                        <h2>My Tasks</h2>
+                        <p>Manage your tasks and stay productive.</p>
+                    </div>
+
+                    <div class="task-controls">
+
+                        <select id="statusFilter">
+                            <option value="all">All Tasks</option>
+                            <option value="todo">To Do</option>
+                            <option value="progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+
+                        <select id="priorityFilter">
+                            <option value="all">All Priorities</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TASK LIST -->
+
+                <div class="task-list" id="taskList">
+
+                    <!-- JavaScript will add tasks here -->
+
+                </div>
+
+
+                <!-- EMPTY STATE -->
+
+                <div class="empty-state" id="emptyState">
+
+                    <div class="empty-icon">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </div>
+
+                    <h3>No tasks found</h3>
 
                     <p>
-                        Add a task above to get started.
+                        You don't have any tasks here yet.
+                    </p>
+
+                    <button class="add-task-btn" id="emptyAddTask">
+                        <i class="fa-solid fa-plus"></i>
+                        Create Your First Task
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================================
+                 PRODUCTIVITY SECTION
+            ================================= -->
+
+            <section class="productivity-section">
+
+                <div class="productivity-card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h2>Productivity</h2>
+                            <p>Your task completion progress</p>
+                        </div>
+
+                        <span id="productivityPercentage">0%</span>
+
+                    </div>
+
+                    <div class="progress-bar">
+                        <div
+                            class="progress-fill"
+                            id="progressFill"
+                        ></div>
+                    </div>
+
+                    <p class="progress-text">
+                        Keep going! You're doing great.
                     </p>
 
                 </div>
 
-            </div>
+
+                <div class="quick-card">
+
+                    <div class="card-header">
+                        <div>
+                            <h2>Quick Add</h2>
+                            <p>Create a task quickly</p>
+                        </div>
+                    </div>
+
+                    <form id="quickTaskForm">
+
+                        <input
+                            type="text"
+                            id="quickTaskInput"
+                            placeholder="What needs to be done?"
+                            required
+                        >
+
+                        <button type="submit">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
 
         </section>
 
     </main>
 
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- ================================
+         ADD TASK MODAL
+    ================================= -->
 
-        <div class="container">
+    <div class="modal-overlay" id="taskModal">
 
-            <p>
-                &copy; 2026 BrightEdge Technologies
-            </p>
+        <div class="modal">
+
+            <div class="modal-header">
+
+                <div>
+                    <h2>Create New Task</h2>
+                    <p>Add a new task to your workspace.</p>
+                </div>
+
+                <button class="close-modal" id="closeTaskModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <form id="taskForm">
+
+                <div class="form-group">
+
+                    <label for="taskTitle">
+                        Task Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="taskTitle"
+                        placeholder="e.g. Finish portfolio website"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="taskDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="taskDescription"
+                        rows="4"
+                        placeholder="Add some details about this task..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="taskPriority">
+                            Priority
+                        </label>
+
+                        <select id="taskPriority">
+
+                            <option value="low">
+                                Low
+                            </option>
+
+                            <option value="medium" selected>
+                                Medium
+                            </option>
+
+                            <option value="high">
+                                High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="taskStatus">
+                            Status
+                        </label>
+
+                        <select id="taskStatus">
+
+                            <option value="todo">
+                                To Do
+                            </option>
+
+                            <option value="progress">
+                                In Progress
+                            </option>
+
+                            <option value="completed">
+                                Completed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="taskDueDate">
+                            Due Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="taskDueDate"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="taskCategory">
+                            Category
+                        </label>
+
+                        <select id="taskCategory">
+
+                            <option value="personal">
+                                Personal
+                            </option>
+
+                            <option value="work">
+                                Work
+                            </option>
+
+                            <option value="development">
+                                Development
+                            </option>
+
+                            <option value="school">
+                                School
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="cancel-btn"
+                        id="cancelTask"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="save-task-btn"
+                    >
+                        <i class="fa-solid fa-plus"></i>
+                        Create Task
+                    </button>
+
+                </div>
+
+            </form>
 
         </div>
 
-    </footer>
+    </div>
 
 
+    <!-- JavaScript -->
     <script src="script.js"></script>
 
 </body>
